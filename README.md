@@ -144,7 +144,7 @@ Alle drei BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** al
 
 - **Auflösung:** 40×23 aktive Zellen (Zeilen 1–23), Zeile 24 leer, Zeile 25 Status
 - **Darstellung:** POKE in Bildschirm- (`1024`) und Farbspeicher (`55296`), invertierte Blöcke
-- **Start:** Zwei Glider aus `DATA`-Zeilen + ca. 25 % Zufallsbelegung (230 Zellen)
+- **Start:** Zwei Glider aus `DATA`-Zeilen + ca. 12 % Zufallsbelegung (110 Zellen)
 
 **Emulator (z. B. VICE):**
 
@@ -166,7 +166,7 @@ RUN
 
 - **80×23** Spielfeld über den **VDC** (`GRAPHICS 5`)
 - CPU im **FAST**-Modus (2 MHz) für flüssigere Updates
-- Schreibzugriffe über VDC-Register (`54784`/`54785`); ca. 25 % Zufallsfüllung (460 Zellen)
+- Schreibzugriffe über VDC-Register (`54784`/`54785`); ca. 12 % Zufallsfüllung (221 Zellen)
 - **VICE:** C128, 80-Spalten-/VDC-Ansicht aktivieren, dann Programm laden und `RUN`
 
 ---
