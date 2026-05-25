@@ -14,7 +14,7 @@ Features:
 * Help overlay and post-session summary.
 * Works on Unix and Windows (`pip install windows-curses`).
 
-Run:  python game_of_life.py
+Run:  python pc/game_of_life.py
 """
 
 import curses

@@ -13,7 +13,7 @@ Features:
 * After game over: show score and choose restart or quit.
 * Works on Unix terminals and on Windows with `pip install windows-curses`.
 
-Run:  python snake.py
+Run:  python pc/snake.py
 """
 
 import curses

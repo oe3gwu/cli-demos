@@ -14,7 +14,7 @@ Features:
 * Game over menu: restart or quit.
 * Unix terminals and Windows with `pip install windows-curses`.
 
-Run:  python tetris.py
+Run:  python pc/tetris.py
 """
 
 import curses
