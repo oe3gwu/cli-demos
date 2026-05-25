@@ -24,13 +24,13 @@
 170 next x:next y
 180 gosub 1000
 190 goto 60
-800 rem seed - 12% of 1840 = 221 cells
+800 rem seed - 11% of 1840 = 202 cells
 805 r=rnd(-ti)
 810 cx=40:cy=11
 820 for k=0 to 4:read x,y:c((cy+y)*w+cx+x)=1:next
 830 cx=5:cy=5
 840 for k=0 to 4:read x,y:c((cy+y)*w+cx+x)=1:next
-850 for k=1 to 221:y=int(rnd(1)*23)+1:x=int(rnd(1)*80)+1:c(y*w+x)=1:next
+850 for k=1 to 202:y=int(rnd(1)*23)+1:x=int(rnd(1)*80)+1:c(y*w+x)=1:next
 895 return
 900 rem draw playfield lines 1-23
 910 for y=1 to 23
