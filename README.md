@@ -138,13 +138,13 @@ Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Muste
 
 ## Commodore-Demos (BASIC)
 
-Alle drei BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** als Endlosschleife: Zufallsstart plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile.
+Alle drei BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** als Endlosschleife: Zufallsstart (RNG **8–11 %** Belegung pro Runde) plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile; nach **50 Generationen** Neustart mit neuem Seed.
 
 ### Commodore 64 — `c64/game_of_life.bas`
 
 - **Auflösung:** 40×23 aktive Zellen (Zeilen 1–23), Zeile 24 leer, Zeile 25 Status
 - **Darstellung:** POKE in Bildschirm- (`1024`) und Farbspeicher (`55296`), invertierte Blöcke
-- **Start:** Zwei Glider aus `DATA`-Zeilen + ca. 11 % Zufallsbelegung (101 Zellen)
+- **Start:** Zwei Glider aus `DATA`-Zeilen + Zufallsbelegung **8–11 %** (73–101 Zellen); alle **50 Gen.** Neustart
 
 **Emulator (z. B. VICE):**
 
@@ -166,7 +166,7 @@ RUN
 
 - **80×23** Spielfeld über den **VDC** (`GRAPHICS 5`)
 - CPU im **FAST**-Modus (2 MHz) für flüssigere Updates
-- Schreibzugriffe über VDC-Register (`54784`/`54785`); ca. 11 % Zufallsfüllung (202 Zellen)
+- Schreibzugriffe über VDC-Register (`54784`/`54785`); Zufallsfüllung **8–11 %** (147–202 Zellen); alle **50 Gen.** Neustart
 - **VICE:** C128, 80-Spalten-/VDC-Ansicht aktivieren, dann Programm laden und `RUN`
 
 ---

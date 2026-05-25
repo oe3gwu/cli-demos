@@ -5,9 +5,10 @@
 11 w=82:h=27:wh=w*h:dim c(wh)
 12 rw=80:bl=160:sp=32
 13 slb=23*rw:sl2=24*rw
-20 for i=0 to wh-1:c(i)=0:next
-30 gosub 800
-40 g=0:gosub 900:gosub 700
+14 maxg=50:pf=1840
+30 gosub 600
+35 gosub 700
+40 g=0
 50 pn=0:for y=1 to 23:for x=1 to 80:pn=pn+c(y*w+x):next x:next y
 55 gosub 1000
 60 g=g+1:pn=0
@@ -23,14 +24,24 @@
 160 c(i)=q:pn=pn+q
 170 next x:next y
 180 gosub 1000
+185 if g>=maxg then gosub 600:goto 40
 190 goto 60
-800 rem seed - 11% of 1840 = 202 cells
+600 rem restart - clear, seed, redraw field
+610 for i=0 to wh-1:c(i)=0:next
+620 gosub 800
+630 g=0:gosub 900
+690 return
+800 rem seed - rng 8-11% of pf cells per start
 805 r=rnd(-ti)
+806 p=8+int(rnd(1)*4)
+807 nc=int(pf*p/100)
+808 restore 3000
 810 cx=40:cy=11
 820 for k=0 to 4:read x,y:c((cy+y)*w+cx+x)=1:next
 830 cx=5:cy=5
-840 for k=0 to 4:read x,y:c((cy+y)*w+cx+x)=1:next
-850 for k=1 to 202:y=int(rnd(1)*23)+1:x=int(rnd(1)*80)+1:c(y*w+x)=1:next
+840 restore 3010
+850 for k=0 to 4:read x,y:c((cy+y)*w+cx+x)=1:next
+860 for k=1 to nc:y=int(rnd(1)*23)+1:x=int(rnd(1)*80)+1:c(y*w+x)=1:next
 895 return
 900 rem draw playfield lines 1-23
 910 for y=1 to 23
