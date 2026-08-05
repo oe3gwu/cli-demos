@@ -8,12 +8,12 @@ Sammlung von **Spielen und Simulationen für die Kommandozeile** — auf dem PC 
 |-----------|----------|--------------|
 | PC | [Snake](pc/snake.py) | Klassisches Snake-Spiel, Spielfeld passt sich der Terminalgröße an |
 | PC | [Tetris](pc/tetris.py) | Tetris mit Hold, Ghost-Piece, Next-Vorschau und Level-System |
-| PC | [Game of Life](pc/game_of_life.py) | Conway’s Game of Life mit Editor, Mustern und mehreren Regelwerken |
-| C64 | [Game of Life](c64/game_of_life.bas) | Automatische Simulation, 40×23 Spielfeld, Statuszeile |
-| C16 | [Game of Life](c16/game_of_life.bas) | BASIC 3.5 / TED, schwarz + C16-Lila |
-| C128 | [Game of Life (VIC-II)](c128/game_of_life_vic2-40.bas) | BASIC, 40 Spalten VIC-II |
-| C128 | [Game of Life (VDC)](c128/game_of_life_vdc-80.bas) | BASIC, 80 Spalten VDC |
-| MEGA65 | [Game of Life](mega65/game_of_life_80.bas) | 80×25 nativer Text, BASIC 65, natives Blau/Weiß |
+| PC | [2D Game of Life](pc/2d_game_of_life.py) | Conway’s Game of Life mit Editor, Mustern und mehreren Regelwerken |
+| C64 | [2D Game of Life](c64/2d_game_of_life.bas) | Automatische Simulation, 40×23 Spielfeld, Statuszeile |
+| C16 | [2D Game of Life](c16/2d_game_of_life.bas) | BASIC 3.5 / TED, schwarz + C16-Boot-Lila |
+| C128 | [2D Game of Life (VIC-II)](c128/2d_game_of_life_vic2-40.bas) | BASIC, 40 Spalten VIC-II |
+| C128 | [2D Game of Life (VDC)](c128/2d_game_of_life_vdc-80.bas) | BASIC, 80 Spalten VDC |
+| MEGA65 | [2D Game of Life](mega65/2d_game_of_life_80.bas) | 80×25 nativer Text, BASIC 65, natives Blau/Weiß |
 
 ## Verzeichnisstruktur
 
@@ -23,16 +23,18 @@ cli-demos/
 ├── pc/                          # Python 3, nur Standardbibliothek (+ curses)
 │   ├── snake.py
 │   ├── tetris.py
-│   └── game_of_life.py
+│   └── 2d_game_of_life.py
 ├── c64/
-│   └── game_of_life.bas         # Commodore 64 BASIC V2
+│   └── 2d_game_of_life.bas       # Commodore 64 BASIC V2
 ├── c16/
-│   └── game_of_life.bas         # C16 / Plus/4 BASIC 3.5 (TED)
+│   └── 2d_game_of_life.bas       # C16 / Plus/4 BASIC 3.5 (TED)
 ├── c128/
-│   ├── game_of_life_vic2-40.bas  # C128 BASIC, VIC-II 40 Spalten
-│   └── game_of_life_vdc-80.bas   # C128 BASIC, VDC 80 Spalten
+│   ├── 2d_game_of_life_vic2-40.bas  # C128 BASIC, VIC-II 40 Spalten
+│   └── 2d_game_of_life_vdc-80.bas   # C128 BASIC, VDC 80 Spalten
 └── mega65/
-    └── game_of_life_80.bas      # MEGA65, BASIC 65, 80×25 Text
+    ├── 2d_game_of_life_80.bas    # MEGA65, BASIC 65, 80×25 Text
+    ├── 2d_game_of_life_80.prg
+    └── 2d_game_of_life.d81
 ```
 
 ---
@@ -57,15 +59,15 @@ Alle PC-Programme vom Repository-Root aus starten:
 ```bash
 python3 pc/snake.py
 python3 pc/tetris.py
-python3 pc/game_of_life.py
+python3 pc/2d_game_of_life.py
 ```
 
-Das Terminal sollte ausreichend groß sein (mindestens ca. 80×24 Zeichen für Tetris und Game of Life; kleinere Fenster funktionieren teilweise mit eingeschränktem Layout).
+Das Terminal sollte ausreichend groß sein (mindestens ca. 80×24 Zeichen für Tetris und 2D Game of Life; kleinere Fenster funktionieren teilweise mit eingeschränktem Layout).
 
 ### Gemeinsame Hinweise
 
 - **Unicode-Zeichen** (Blöcke, Rahmen) werden für Darstellung genutzt; die Terminal-Schriftart sollte UTF-8 unterstützen.
-- **Fenstergröße**: Snake und Game of Life passen das Raster an die aktuelle Terminalgröße an; Tetris skaliert Zellenbreite/-höhe nach verfügbarem Platz.
+- **Fenstergröße**: Snake und 2D Game of Life passen das Raster an die aktuelle Terminalgröße an; Tetris skaliert Zellenbreite/-höhe nach verfügbarem Platz.
 - Beenden: meist **`Q`** oder **ESC**; Tetris und Snake bieten nach Game Over ein Neustart-Menü (**`R`**).
 
 ---
@@ -106,7 +108,7 @@ Score, Zeilen und Level steigen mit gelöschten Reihen; die Fallgeschwindigkeit 
 
 ---
 
-### Game of Life (`pc/game_of_life.py`)
+### 2D Game of Life (`pc/2d_game_of_life.py`)
 
 Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Musterbibliothek und wählbaren Regelwerken (B/S-Notation).
 
@@ -144,9 +146,9 @@ Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Muste
 
 ## Commodore-Demos (BASIC)
 
-Alle Commodore-/MEGA65-BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** als Endlosschleife mit **simultanem Update** (Doppelpuffer): Zufallsstart (RNG **15–20 %** Belegung pro Runde) plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile; nach **20 Generationen** Neustart mit neuem Seed.
+Alle Commodore-/MEGA65-BASIC-Programme implementieren **2D Conway’s Game of Life (B3/S23)** als Endlosschleife mit **simultanem Update** (Doppelpuffer): Zufallsstart (RNG **15–20 %** Belegung pro Runde) plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile; nach **20 Generationen** Neustart mit neuem Seed.
 
-### Commodore 64 — `c64/game_of_life.bas`
+### Commodore 64 — `c64/2d_game_of_life.bas`
 
 - **Auflösung:** 40×23 aktive Zellen (Zeilen 1–23), Zeile 24 leer, Zeile 25 Status
 - **Darstellung:** POKE in Bildschirm- (`1024`) und Farbspeicher (`55296`), invertierte Blöcke
@@ -154,10 +156,10 @@ Alle Commodore-/MEGA65-BASIC-Programme implementieren **Conway’s Game of Life 
 
 **Emulator (z. B. VICE):**
 
-1. `x64` starten, BASIC laden: `.load"game_of_life.bas",8` oder Datei per Drag & Drop
+1. `x64` starten, BASIC laden: `.load"2d_game_of_life.bas",8` oder Datei per Drag & Drop
 2. `RUN`
 
-### Commodore 16 / Plus/4 — `c16/game_of_life.bas`
+### Commodore 16 / Plus/4 — `c16/2d_game_of_life.bas`
 
 - **40×23** wie C64; TED-Screen `3072`, Farbe `2048`
 - **Farben:** Hintergrund/Rahmen schwarz; Vordergrund echtes C16-Boot-Lila (`COLOR 1,15,6` = TED `$6E` aus dem Kernal, nicht Purple/5)
@@ -166,22 +168,23 @@ Alle Commodore-/MEGA65-BASIC-Programme implementieren **Conway’s Game of Life 
 
 ### Commodore 128 — VIC-II 40 Spalten
 
-- [`c128/game_of_life_vic2-40.bas`](c128/game_of_life_vic2-40.bas)
+- [`c128/2d_game_of_life_vic2-40.bas`](c128/2d_game_of_life_vic2-40.bas)
 - **Wichtig:** Nur **40-Spalten-VIC-II** — 80-Spalten aus; in VICE VIC-Ansicht
 - FAST, Integer-Arrays, Zeilenindex; Zufallsfüllung **15–20 %**; Neustart nach **20** Gen.
 
 ### Commodore 128 — VDC 80 Spalten
 
-- [`c128/game_of_life_vdc-80.bas`](c128/game_of_life_vdc-80.bas)
+- [`c128/2d_game_of_life_vdc-80.bas`](c128/2d_game_of_life_vdc-80.bas)
 - **80×23** über VDC, FAST 2 MHz; Integer-Arrays / Zeilenindex; VDC-Schreiben mit voller Adresse (stabil)
 - Zufallsfüllung **15–20 %**; Neustart nach **20** Gen.
 - **VICE:** Zuerst **80col / VDC-Fenster** aktivieren (sonst bleibt der VIC-40-Screen leer/grün).
 
-### MEGA65 — 80 Spalten — `mega65/game_of_life_80.bas`
+### MEGA65 — 80 Spalten — `mega65/2d_game_of_life_80.bas`
 
 - **80×23** Spielfeld im nativen **80×25-Textmodus** (BASIC 65)
 - `SPEED` (40 MHz); Screen-Updates über `T@&(col,row)` — keine Farbbefehle (`BACKGROUND`/`C@&`/…), natives MEGA65-Blau mit weißem Leben
 - Schaltet bei Bedarf per ESC 8 auf 80 Spalten; Zufallsfüllung **15–20 %** (276–368 Zellen); alle **20 Gen.** Neustart
+- Disk: [`mega65/2d_game_of_life.d81`](mega65/2d_game_of_life.d81) / PRG [`mega65/2d_game_of_life_80.prg`](mega65/2d_game_of_life_80.prg)
 - **Hardware/Xemu:** Programm laden und `RUN` (80×25 Text)
 
 ---

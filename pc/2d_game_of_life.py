@@ -14,7 +14,7 @@ Features:
 * Help overlay and post-session summary.
 * Works on Unix and Windows (`pip install windows-curses`).
 
-Run:  python pc/game_of_life.py
+Run:  python pc/2d_game_of_life.py
 """
 
 import curses
@@ -428,7 +428,7 @@ def draw_help_overlay(stdscr):
     stdscr.clear()
     term_h, term_w = stdscr.getmaxyx()
     lines = [
-        ' === Game of Life — Steuerung === ',
+        ' === 2D Game of Life — Steuerung === ',
         '',
         ' Pfeile / WASD     Cursor bewegen',
         ' Leertaste         Simulation starten/stoppen',
