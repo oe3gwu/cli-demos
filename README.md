@@ -10,6 +10,7 @@ Sammlung von **Spielen und Simulationen für die Kommandozeile** — auf dem PC 
 | PC | [Tetris](pc/tetris.py) | Tetris mit Hold, Ghost-Piece, Next-Vorschau und Level-System |
 | PC | [Game of Life](pc/game_of_life.py) | Conway’s Game of Life mit Editor, Mustern und mehreren Regelwerken |
 | C64 | [Game of Life](c64/game_of_life.bas) | Automatische Simulation, 40×23 Spielfeld, Statuszeile |
+| C16 | [Game of Life](c16/game_of_life.bas) | BASIC 3.5 / TED, schwarz + C16-Lila |
 | C128 | [Game of Life (VIC-II)](c128/game_of_life_vic2-40.bas) | BASIC, 40 Spalten VIC-II |
 | C128 | [Game of Life (VDC)](c128/game_of_life_vdc-80.bas) | BASIC, 80 Spalten VDC |
 | MEGA65 | [Game of Life](mega65/game_of_life_80.bas) | 80×25 nativer Text, BASIC 65, natives Blau/Weiß |
@@ -25,6 +26,8 @@ cli-demos/
 │   └── game_of_life.py
 ├── c64/
 │   └── game_of_life.bas         # Commodore 64 BASIC V2
+├── c16/
+│   └── game_of_life.bas         # C16 / Plus/4 BASIC 3.5 (TED)
 ├── c128/
 │   ├── game_of_life_vic2-40.bas  # C128 BASIC, VIC-II 40 Spalten
 │   └── game_of_life_vdc-80.bas   # C128 BASIC, VDC 80 Spalten
@@ -153,6 +156,13 @@ Alle Commodore-/MEGA65-BASIC-Programme implementieren **Conway’s Game of Life 
 
 1. `x64` starten, BASIC laden: `.load"game_of_life.bas",8` oder Datei per Drag & Drop
 2. `RUN`
+
+### Commodore 16 / Plus/4 — `c16/game_of_life.bas`
+
+- **40×23** wie C64; TED-Screen `3072`, Farbe `2048`
+- **Farben:** Hintergrund/Rahmen schwarz; Vordergrund echtes C16-Boot-Lila (`COLOR 1,15,6` = TED `$6E` aus dem Kernal, nicht Purple/5)
+- Kompakte Arrays (16 K-tauglich); Zufallsfüllung **15–20 %**; Neustart nach **20** Gen.
+- **VICE:** `xplus4` oder C16, Programm laden und `RUN`
 
 ### Commodore 128 — VIC-II 40 Spalten
 
