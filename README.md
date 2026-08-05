@@ -10,8 +10,9 @@ Sammlung von **Spielen und Simulationen für die Kommandozeile** — auf dem PC 
 | PC | [Tetris](pc/tetris.py) | Tetris mit Hold, Ghost-Piece, Next-Vorschau und Level-System |
 | PC | [Game of Life](pc/game_of_life.py) | Conway’s Game of Life mit Editor, Mustern und mehreren Regelwerken |
 | C64 | [Game of Life](c64/game_of_life.bas) | Automatische Simulation, 40×23 Spielfeld, Statuszeile |
-| C128 | [Game of Life (VIC-II)](c128/game_of_life_vic2-40.bas) | Wie C64, 40 Spalten im VIC-II-Fenster |
-| C128 | [Game of Life (VDC)](c128/game_of_life_vdc-80.bas) | 80 Spalten über den VDC-Chip (Graphics 5) |
+| C128 | [Game of Life (VIC-II)](c128/game_of_life_vic2-40.bas) | BASIC, 40 Spalten VIC-II |
+| C128 | [Game of Life (VDC)](c128/game_of_life_vdc-80.bas) | BASIC, 80 Spalten VDC |
+| MEGA65 | [Game of Life](mega65/game_of_life_80.bas) | 80×25 nativer Text, BASIC 65, natives Blau/Weiß |
 
 ## Verzeichnisstruktur
 
@@ -24,9 +25,11 @@ cli-demos/
 │   └── game_of_life.py
 ├── c64/
 │   └── game_of_life.bas         # Commodore 64 BASIC V2
-└── c128/
-    ├── game_of_life_vic2-40.bas # C128, VIC-II 40 Spalten
-    └── game_of_life_vdc-80.bas  # C128, VDC 80 Spalten
+├── c128/
+│   ├── game_of_life_vic2-40.bas  # C128 BASIC, VIC-II 40 Spalten
+│   └── game_of_life_vdc-80.bas   # C128 BASIC, VDC 80 Spalten
+└── mega65/
+    └── game_of_life_80.bas      # MEGA65, BASIC 65, 80×25 Text
 ```
 
 ---
@@ -138,43 +141,45 @@ Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Muste
 
 ## Commodore-Demos (BASIC)
 
-Alle drei BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** als Endlosschleife: Zufallsstart (RNG **8–11 %** Belegung pro Runde) plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile; nach **50 Generationen** Neustart mit neuem Seed.
+Alle Commodore-/MEGA65-BASIC-Programme implementieren **Conway’s Game of Life (B3/S23)** als Endlosschleife mit **simultanem Update** (Doppelpuffer): Zufallsstart (RNG **15–20 %** Belegung pro Runde) plus zwei eingebettete Glider, Anzeige von **Population** und **Generation** in der untersten Zeile; nach **20 Generationen** Neustart mit neuem Seed.
 
 ### Commodore 64 — `c64/game_of_life.bas`
 
 - **Auflösung:** 40×23 aktive Zellen (Zeilen 1–23), Zeile 24 leer, Zeile 25 Status
 - **Darstellung:** POKE in Bildschirm- (`1024`) und Farbspeicher (`55296`), invertierte Blöcke
-- **Start:** Zwei Glider aus `DATA`-Zeilen + Zufallsbelegung **8–11 %** (73–101 Zellen); alle **50 Gen.** Neustart
+- **Start:** Zwei Glider aus `DATA`-Zeilen + Zufallsbelegung **15–20 %** (138–184 Zellen); alle **20 Gen.** Neustart
 
 **Emulator (z. B. VICE):**
 
 1. `x64` starten, BASIC laden: `.load"game_of_life.bas",8` oder Datei per Drag & Drop
 2. `RUN`
 
-### Commodore 128 — VIC-II 40 Spalten — `c128/game_of_life_vic2-40.bas`
+### Commodore 128 — VIC-II 40 Spalten
 
-- Entspricht der C64-Version, angepasst für **BASIC 7** und C128
-- **Wichtig:** Nur das **40-Spalten-VIC-II-Fenster** — **80-Spalten-Modus aus**
-- In VICE: Graphics 0, VIC-Ansicht, 80 columns **off**
+- [`c128/game_of_life_vic2-40.bas`](c128/game_of_life_vic2-40.bas)
+- **Wichtig:** Nur **40-Spalten-VIC-II** — 80-Spalten aus; in VICE VIC-Ansicht
+- FAST, Integer-Arrays, Zeilenindex; Zufallsfüllung **15–20 %**; Neustart nach **20** Gen.
 
-```text
-GRAPHICS 0
-RUN
-```
+### Commodore 128 — VDC 80 Spalten
 
-### Commodore 128 — VDC 80 Spalten — `c128/game_of_life_vdc-80.bas`
+- [`c128/game_of_life_vdc-80.bas`](c128/game_of_life_vdc-80.bas)
+- **80×23** über VDC, FAST 2 MHz; Integer-Arrays / Zeilenindex; VDC-Schreiben mit voller Adresse (stabil)
+- Zufallsfüllung **15–20 %**; Neustart nach **20** Gen.
+- **VICE:** Zuerst **80col / VDC-Fenster** aktivieren (sonst bleibt der VIC-40-Screen leer/grün).
 
-- **80×23** Spielfeld über den **VDC** (`GRAPHICS 5`)
-- CPU im **FAST**-Modus (2 MHz) für flüssigere Updates
-- Schreibzugriffe über VDC-Register (`54784`/`54785`); Zufallsfüllung **8–11 %** (147–202 Zellen); alle **50 Gen.** Neustart
-- **VICE:** C128, 80-Spalten-/VDC-Ansicht aktivieren, dann Programm laden und `RUN`
+### MEGA65 — 80 Spalten — `mega65/game_of_life_80.bas`
+
+- **80×23** Spielfeld im nativen **80×25-Textmodus** (BASIC 65)
+- `SPEED` (40 MHz); Screen-Updates über `T@&(col,row)` — keine Farbbefehle (`BACKGROUND`/`C@&`/…), natives MEGA65-Blau mit weißem Leben
+- Schaltet bei Bedarf per ESC 8 auf 80 Spalten; Zufallsfüllung **15–20 %** (276–368 Zellen); alle **20 Gen.** Neustart
+- **Hardware/Xemu:** Programm laden und `RUN` (80×25 Text)
 
 ---
 
 ## Entwicklung & Beiträge
 
 - PC-Code: nur Standardbibliothek; keine `requirements.txt` nötig (außer `windows-curses` unter Windows).
-- Commodore-Code: in **VICE** oder auf echter Hardware testen; Pfade beim Laden an das jeweilige Medium (Diskette, `.d64`, SD2IEC) anpassen.
+- Commodore-/MEGA65-Code: in **VICE**, **Xemu** oder auf echter Hardware testen; Pfade beim Laden an das jeweilige Medium (Diskette, `.d64`, SD2IEC, SD-Karte) anpassen.
 - Änderungen an Spielregeln oder Layout: jeweilige Datei enthält Konfigurationskonstanten und Kommentare am Dateianfang.
 
 ## Lizenz
