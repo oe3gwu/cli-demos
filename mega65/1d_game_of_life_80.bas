@@ -36,6 +36,12 @@
 630 g=0:ry=0:gosub 900:gosub 700
 640 pn=0:for x=0 to 79:pn=pn+c&(x):next:gosub 1000
 690 return
+700 rem line 24 blank, line 25: POP left, SEED center, GEN right
+710 for i=0 to 79:t@&(i,23)=32:t@&(i,24)=32:next
+720 t@&(0,24)=16:t@&(1,24)=15:t@&(2,24)=16:t@&(3,24)=58
+740 t@&(35,24)=19:t@&(36,24)=5:t@&(37,24)=5:t@&(38,24)=4:t@&(39,24)=58
+750 t@&(65,24)=7:t@&(66,24)=5:t@&(67,24)=14:t@&(68,24)=58
+790 return
 800 rem seed — ~28-35% live
 805 r=rnd(-ti)
 806 sd=28+int(rnd(1)*8)
@@ -48,12 +54,6 @@
 950 rem draw array n&() on screen row ry
 960 for x=0 to 79:t@&(x,ry)=sp+n&(x)*d:next
 980 return
-700 rem line 24 blank, line 25: POP left, SEED center, GEN right
-710 for i=0 to 79:t@&(i,23)=32:t@&(i,24)=32:next
-720 t@&(0,24)=16:t@&(1,24)=15:t@&(2,24)=16:t@&(3,24)=58
-740 t@&(35,24)=19:t@&(36,24)=5:t@&(37,24)=5:t@&(38,24)=4:t@&(39,24)=58
-750 t@&(65,24)=7:t@&(66,24)=5:t@&(67,24)=14:t@&(68,24)=58
-790 return
 1000 rem digits: pop@4, seed%@40, gen@70
 1010 t=pn:sx=4:gosub 1100
 1015 t=sd:sx=40:gosub 1100

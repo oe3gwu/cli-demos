@@ -31,6 +31,11 @@
 620 gosub 800
 630 g=0:gosub 900:gosub 700
 690 return
+700 rem line 24 blank, line 25 clear then labels
+710 for i=0 to 79:t@&(i,23)=32:t@&(i,24)=32:next
+720 t@&(0,24)=16:t@&(1,24)=15:t@&(2,24)=16:t@&(3,24)=58
+730 t@&(65,24)=7:t@&(66,24)=5:t@&(67,24)=14:t@&(68,24)=58
+790 return
 800 rem seed - rng 15-20% of pf cells per start
 805 r=rnd(-ti)
 806 p=15+int(rnd(1)*6)
@@ -50,11 +55,6 @@
 930 t@&(x-1,y-1)=sp+c&(i0+x)*(bl-sp)
 940 next x:next y
 990 return
-700 rem line 24 blank, line 25 clear then labels
-710 for i=0 to 79:t@&(i,23)=32:t@&(i,24)=32:next
-720 t@&(0,24)=16:t@&(1,24)=15:t@&(2,24)=16:t@&(3,24)=58
-730 t@&(65,24)=7:t@&(66,24)=5:t@&(67,24)=14:t@&(68,24)=58
-790 return
 1000 rem line 25 digits only
 1010 t=pn:sx=4:gosub 1100
 1020 t=g:sx=70:gosub 1100
