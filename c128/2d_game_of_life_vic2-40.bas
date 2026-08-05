@@ -2,7 +2,7 @@
 1 rem vice: graphics 0, view vic window, 80col off
 2 rem speed: int arrays, row index, dirty poke only
 5 graphics 0
-10 print chr$(147):poke 53280,0:poke 53281,0:fast
+10 print chr$(147):poke 53280,0:poke 53281,0:slow
 11 w=42:h=27:wh=w*h:dim c%(wh),n%(wh)
 12 sc=1024:cr=55296:bl=160:sp=32:lg=13:d=128
 13 slb=sc+23*40:sl2=sc+24*40:clb=cr+23*40:cl2=cr+24*40
