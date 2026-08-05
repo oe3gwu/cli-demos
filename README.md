@@ -17,7 +17,7 @@ Sammlung von **Spielen und Simulationen für die Kommandozeile** — auf dem PC 
 | C128 | [1D Game of Life (VIC-II)](c128/1d_game_of_life_vic2-40.bas) | 1D-Life, 40 Spalten VIC-II |
 | C128 | [2D Game of Life (VDC)](c128/2d_game_of_life_vdc-80.bas) | 80 Spalten VDC; **extrem langsam** |
 | C128 | [1D Game of Life (VDC)](c128/1d_game_of_life_vdc-80.bas) | 1D-Life, 80 Spalten VDC |
-| MEGA65 | [2D Game of Life](mega65/2d_game_of_life_80.bas) | 80×25 Text, BASIC 65, natives Blau/Weiß |
+| MEGA65 | [2D Game of Life](mega65/2d_game_of_life_80.bas) | 80×25 Text; auf Hardware getestet |
 | MEGA65 | [1D Game of Life](mega65/1d_game_of_life_80.bas) | 1D-Life, 80 Spalten, Evolution-Ansicht |
 
 ## Verzeichnisstruktur
@@ -156,7 +156,7 @@ Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Muste
 
 ## Commodore-Demos (BASIC)
 
-**2D:** Conway’s Game of Life (B3/S23) als Endlosschleife mit **simultanem Update** (Doppelpuffer): Zufallsstart (RNG **15–20 %**) plus zwei Glider; `POP`/`GEN`; Neustart nach **20** Gen. Auf **C64 / C16 / C128 extrem langsam** (reine BASIC-Schleifen über das ganze Gitter).
+**2D:** Conway’s Game of Life (B3/S23) als Endlosschleife mit **simultanem Update** (Doppelpuffer): Zufallsstart (RNG **15–20 %**) plus zwei Glider; `POP`/`GEN`; Neustart nach **20** Gen. Auf **C64 / C16 / C128 extrem langsam** (reine BASIC-Schleifen über das ganze Gitter); auf dem **MEGA65 getestet und lauffähig** (`SPEED`).
 
 **1D:** Millen/BYTE-Life ([jonmillen.com/1dlife](https://jonmillen.com/1dlife/index.html)), Nachbarschaft `YYXYY`, Evolution-Ansicht (jede Gen. eine Zeile), Wrap-Ring, Seed **28–35 %**, Status `POP` / `SEED` / `GEN`, Neustart nach **20** Gen.
 
@@ -208,10 +208,10 @@ Ausführliche Terminal-Version von **Conway’s Game of Life** mit Editor, Muste
 
 ### MEGA65 — 80 Spalten
 
-- 2D: [`mega65/2d_game_of_life_80.bas`](mega65/2d_game_of_life_80.bas) — **80×23**, `SPEED`, `T@&`, natives Blau/Weiß; Seed **15–20 %**
+- 2D: [`mega65/2d_game_of_life_80.bas`](mega65/2d_game_of_life_80.bas) — **funktioniert auf Hardware**; **80×23**, `SPEED`, `T@&`, natives Blau/Weiß; Seed **15–20 %**
 - 1D: [`mega65/1d_game_of_life_80.bas`](mega65/1d_game_of_life_80.bas) — 80er-Ring, Evolution-Ansicht; Seed **28–35 %**
 - Schaltet bei Bedarf per ESC 8 auf 80 Spalten; Neustart nach **20** Gen.
-- Disk (2D): [`mega65/2d_game_of_life.d81`](mega65/2d_game_of_life.d81) / PRG [`mega65/2d_game_of_life_80.prg`](mega65/2d_game_of_life_80.prg) — Zeilennumerierung im PRG aufsteigend (sonst `UNDEFINED STATEMENT`)
+- Disk (2D): [`mega65/2d_game_of_life.d81`](mega65/2d_game_of_life.d81) / PRG [`mega65/2d_game_of_life_80.prg`](mega65/2d_game_of_life_80.prg)
 - **Hardware/Xemu:** Programm laden und `RUN` (80×25 Text)
 
 ---
